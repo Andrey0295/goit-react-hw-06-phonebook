@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import ContactListItem from './ContactListItem/ContactListItem';
+import contactsActions from '../../redux/contacts/contacts-actions';
 
 const ContactList = ({ contactsData, onDelete }) => {
   return (
@@ -26,4 +29,12 @@ ContactList.defaultProps = {
   contactsData: [],
 };
 
-export default ContactList;
+const mapStateToProps = state => ({
+  contactsData: state.phonebook.contacts,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDelete: contactId => dispatch(contactsActions.deleteContact(contactId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

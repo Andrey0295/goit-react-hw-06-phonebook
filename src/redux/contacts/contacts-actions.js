@@ -2,7 +2,7 @@
 import shortid from 'shortid';
 import types from './contacts-types';
 
-const addContact = (name, number) => ({
+const addContact = ({ name, number }) => ({
   type: types.ADD,
   payload: {
     id: shortid.generate(),
@@ -11,4 +11,9 @@ const addContact = (name, number) => ({
   },
 });
 
-export default { addContact };
+const deleteContact = contactId => ({
+  type: types.DELETE,
+  payload: contactId,
+});
+
+export default { addContact, deleteContact };

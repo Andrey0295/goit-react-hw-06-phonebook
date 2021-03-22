@@ -30,11 +30,11 @@ class App extends Component {
   //   }));
   // };
 
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
-  };
+  // deleteContact = contactId => {
+  //   this.setState(prevState => ({
+  //     contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  //   }));
+  // };
 
   // handleContactsData = data => {
   //   const { name, number } = data;
@@ -80,8 +80,8 @@ class App extends Component {
               onChangeFilter={this.changeFilter}
             /> */}
             <ContactList
-              // contactsData={visibleContacts}
-              onDelete={this.deleteContact}
+            // contactsData={visibleContacts}
+            // onDelete={this.deleteContact}
             />
           </div>
         </div>
