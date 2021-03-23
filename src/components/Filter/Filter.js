@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
+import { connect } from 'react-redux';
+import contactsActions from '../../redux/contacts/contacts-actions';
 
 import styles from './Filter.module.css';
 
@@ -28,4 +30,14 @@ Filter.propTypes = {
 Filter.defaultProps = {
   filterValue: '',
 };
-export default Filter;
+
+const mapStateToProps = state => ({
+  filterValue: state.phonebook.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onChangeFilter: event =>
+    dispatch(contactsActions.changeFilter(event.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

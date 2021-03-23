@@ -29,8 +29,16 @@ ContactList.defaultProps = {
   contactsData: [],
 };
 
-const mapStateToProps = state => ({
-  contactsData: state.phonebook.contacts,
+const getVisibleContacts = (allContacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return allContacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter),
+  );
+};
+
+const mapStateToProps = ({ phonebook: { contacts, filter } }) => ({
+  contactsData: getVisibleContacts(contacts, filter),
 });
 
 const mapDispatchToProps = dispatch => ({

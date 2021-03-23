@@ -60,6 +60,19 @@ class ContactForm extends Component {
   }
 }
 
+// handleContactsData = data => {
+//   const { name, number } = data;
+//   const { contacts } = this.state;
+
+//   const getSameName = contacts.filter(
+//     contact => contact.name.toLowerCase() === name.toLowerCase(),
+//   );
+
+//   getSameName.length > 0
+//     ? alert(`${name} is already in contacts`)
+//     : this.addContact(name, number);
+// };
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: ({ name, number }) =>
     dispatch(contacstActions.addContact({ name, number })),

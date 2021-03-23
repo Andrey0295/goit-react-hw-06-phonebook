@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import types from './contacts-types';
 
 const contacts = (state = [], { type, payload }) => {
+  const getSameName = state.filter;
   switch (type) {
     case types.ADD:
       return [...state, payload];
@@ -14,8 +15,13 @@ const contacts = (state = [], { type, payload }) => {
   }
 };
 
-const filter = (state = '', action) => {
-  return state;
+const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return payload;
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({

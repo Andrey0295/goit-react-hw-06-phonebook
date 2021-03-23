@@ -14,10 +14,6 @@ class App extends Component {
     // filter: '',
   };
 
-  // componentDidMount() {}
-
-  // componentDidUpdate(prevProps, prevState) {}
-
   // addContact = (name, number) => {
   //   const contact = {
   //     id: shortid.generate(),
@@ -75,10 +71,10 @@ class App extends Component {
           <div className={styles.contactsBlock}>
             <h1>Contacts</h1>
 
-            {/* <Filter
-              filterValue={this.state.filter}
-              onChangeFilter={this.changeFilter}
-            /> */}
+            <Filter
+            // filterValue={this.state.filter}
+            // onChangeFilter={this.changeFilter}
+            />
             <ContactList
             // contactsData={visibleContacts}
             // onDelete={this.deleteContact}
