@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
+import store from '../../redux/store.js';
+
 import contacstActions from '../../redux/contacts/contacts-actions';
 
 import styles from './ContactForm.module.css';
@@ -60,22 +62,20 @@ class ContactForm extends Component {
   }
 }
 
-// handleContactsData = data => {
-//   const { name, number } = data;
-//   const { contacts } = this.state;
-
-//   const getSameName = contacts.filter(
-//     contact => contact.name.toLowerCase() === name.toLowerCase(),
-//   );
-
-//   getSameName.length > 0
-//     ? alert(`${name} is already in contacts`)
-//     : this.addContact(name, number);
-// };
+// const { contacts } = store.getState().phonebook;
+// const getSameName = contacts.filter(contact => contact.name === name);
+const getSameName = (contacts, name) => {
+  return console.log(contacts.filter(contact => contact.name === name));
+};
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: ({ name, number }) =>
-    dispatch(contacstActions.addContact({ name, number })),
+  onSubmit: ({ name, number }) => {
+    const { contacts } = store.getState().phonebook;
+    const getSameName = contacts.filter(contact => contact.name === name);
+    getSameName.length > 0
+      ? alert(`${name} is already in contacts`)
+      : dispatch(contacstActions.addContact({ name, number }));
+  },
 });
 
 export default connect(null, mapDispatchToProps)(ContactForm);
