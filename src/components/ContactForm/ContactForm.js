@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import store from '../../redux/store.js';
-
 import contacstActions from '../../redux/contacts/contacts-actions';
 
 import styles from './ContactForm.module.css';
@@ -23,8 +21,13 @@ class ContactForm extends Component {
   };
 
   onFormSubmit = e => {
+    const { name } = this.state;
+    const { allContacts, onSubmit } = this.props;
     e.preventDefault();
-    this.props.onSubmit(this.state);
+
+    allContacts.filter(contact => contact.name === name).length > 0
+      ? alert(`${name} is already in contacts`)
+      : onSubmit(this.state);
 
     this.setState({
       name: '',
@@ -62,20 +65,13 @@ class ContactForm extends Component {
   }
 }
 
-// const { contacts } = store.getState().phonebook;
-// const getSameName = contacts.filter(contact => contact.name === name);
-const getSameName = (contacts, name) => {
-  return console.log(contacts.filter(contact => contact.name === name));
-};
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: ({ name, number }) => {
-    const { contacts } = store.getState().phonebook;
-    const getSameName = contacts.filter(contact => contact.name === name);
-    getSameName.length > 0
-      ? alert(`${name} is already in contacts`)
-      : dispatch(contacstActions.addContact({ name, number }));
-  },
+const mapStateToProps = ({ phonebook: { contacts } }) => ({
+  allContacts: contacts,
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+const mapDispatchToProps = dispatch => ({
+  onSubmit: ({ name, number }) =>
+    dispatch(contacstActions.addContact({ name, number })),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
